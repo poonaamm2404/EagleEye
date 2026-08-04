@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480" width="400" height="480">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&amp;family=Inter:wght@400;500;600&amp;display=swap');
+      .title-text {
+        font-family: 'Cormorant Garamond', 'Georgia', serif;
+        font-weight: 700;
+        font-size: 38px;
+        letter-spacing: 0.22em;
+        fill: #121212;
+        text-anchor: middle;
+      }
+      .subtitle-text {
+        font-family: 'Inter', sans-serif;
+        font-weight: 600;
+        font-size: 13px;
+        letter-spacing: 0.35em;
+        fill: #B08D57;
+        text-anchor: middle;
+        text-transform: uppercase;
+      }
+      .tagline-text {
+        font-family: 'Cormorant Garamond', 'Georgia', serif;
+        font-style: italic;
+        font-weight: 400;
+        font-size: 15px;
+        letter-spacing: 0.15em;
+        fill: #444444;
+        text-anchor: middle;
+      }
+    </style>
+  </defs>
+
+  <!-- Background Canvas for Light Mode Preview -->
+  <rect width="100%" height="100%" fill="#FFFFFF" rx="16"/>
+
+  <!-- Logo Emblem Centered -->
+  <g transform="translate(80, 20) scale(0.8)">
+    <path d="M 150 14 C 230 14 275 42 282 124 C 282 205 218 266 150 300 C 82 266 18 205 18 124 C 25 42 70 14 150 14 Z" 
+          fill="#121212" stroke="#B08D57" stroke-width="5" stroke-linejoin="round"/>
+          
+    <path d="M 150 28 C 218 28 258 52 264 122 C 264 192 208 246 150 276 C 92 246 36 192 36 122 C 42 52 82 28 150 28 Z" 
+          fill="#222222" stroke="#B08D57" stroke-width="2" stroke-opacity="0.6"/>
+
+    <g transform="translate(0, 5)">
+      <path d="M 92 110 C 98 80 120 62 152 62 C 182 62 206 78 214 96 C 220 110 216 124 210 134 C 204 144 194 150 188 154 L 180 142 L 188 132 C 194 124 196 114 192 104 C 186 92 172 82 152 82 C 130 82 114 96 110 114 Z" 
+            fill="#FFFFFF" />
+      <path d="M 86 124 C 84 100 98 72 134 60 C 168 48 204 62 222 88 C 232 102 234 122 226 140 L 216 132 C 222 120 220 106 212 96 C 198 76 170 64 138 72 C 110 80 98 100 98 120 C 98 140 108 160 118 174 L 108 180 C 94 162 86 142 86 124 Z" 
+            fill="#B08D57"/>
+      <path d="M 125 78 C 145 68 175 70 196 86 C 215 101 224 124 218 148 C 212 168 198 188 178 206 C 164 218 154 226 150 234 C 146 226 136 218 122 206 C 102 188 88 168 82 148 C 78 132 82 116 90 102 C 100 86 112 80 125 78 Z" 
+            fill="#FFFFFF"/>
+      <path d="M 174 126 C 188 122 206 122 220 128 C 234 134 246 146 250 162 C 238 172 224 176 208 170 C 196 166 186 156 180 144 C 176 138 174 132 174 126 Z" 
+            fill="#B08D57"/>
+      <path d="M 220 128 C 235 134 248 148 250 162 C 238 168 226 168 214 162 C 224 154 224 142 220 128 Z" 
+            fill="#121212" opacity="0.2"/>
+      <path d="M 180 144 Q 210 148 242 160" stroke="#121212" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+      <path d="M 128 114 C 140 104 162 104 176 112 L 184 122 C 172 118 155 116 138 124 Z" 
+            fill="#121212"/>
+      <ellipse cx="156" cy="126" rx="9" ry="7" fill="#121212"/>
+      <ellipse cx="156" cy="126" rx="6" ry="4.5" fill="#B08D57"/>
+      <circle cx="156" cy="126" r="3" fill="#121212"/>
+      <circle cx="154.5" cy="124.5" r="1" fill="#FFFFFF"/>
+      <rect x="94" y="162" width="14" height="52" rx="4" 
+            fill="#B08D57" transform="rotate(40 94 162)" stroke="#121212" stroke-width="3"/>
+      <rect x="98" y="166" width="6" height="44" rx="2" 
+            fill="#121212" opacity="0.3" transform="rotate(40 94 162)"/>
+      <rect x="115" y="142" width="18" height="8" rx="2" 
+            fill="#B08D57" transform="rotate(40 115 142)" stroke="#121212" stroke-width="2"/>
+      <circle cx="156" cy="126" r="36" fill="none" stroke="#B08D57" stroke-width="6"/>
+      <circle cx="156" cy="126" r="39" fill="none" stroke="#121212" stroke-width="2"/>
+      <circle cx="156" cy="126" r="33" fill="none" stroke="#121212" stroke-width="2"/>
+      <path d="M 134 104 A 33 33 0 0 1 176 102" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" opacity="0.75"/>
+    </g>
+
+    <g transform="translate(150, 276)">
+      <polygon points="0,-12 4,-3 12,-3 6,2 8,10 0,5 -8,10 -6,2 -12,-3 -4,-3" fill="#B08D57"/>
+    </g>
+  </g>
+
+  <!-- Divider Wings / Flank Lines -->
+  <g transform="translate(200, 290)">
+    <line x1="-120" y1="0" x2="-40" y2="0" stroke="#B08D57" stroke-width="1.5" stroke-opacity="0.7"/>
+    <polygon points="-35,0 -42,-4 -42,4" fill="#B08D57"/>
+    <circle cx="0" cy="0" r="3" fill="#B08D57"/>
+    <line x1="40" y1="0" x2="120" y2="0" stroke="#B08D57" stroke-width="1.5" stroke-opacity="0.7"/>
+    <polygon points="35,0 42,-4 42,4" fill="#B08D57"/>
+  </g>
+
+  <!-- Typography Block -->
+  <text x="200" y="336" class="title-text">EAGLE EYE</text>
+  
+  <text x="200" y="372" class="subtitle-text">PRIVATE INVESTIGATION FIRM</text>
+
+  <!-- Subtle Rule Line -->
+  <line x1="140" y1="392" x2="260" y2="392" stroke="#B08D57" stroke-width="1" stroke-opacity="0.5"/>
+
+  <text x="200" y="420" class="tagline-text">Seeing Beyond the Obvious</text>
+</svg>

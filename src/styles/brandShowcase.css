@@ -1,0 +1,427 @@
+/* EAGLE EYE Brand Identity & Application Showcase Styles */
+
+.brand-showcase-section {
+  padding: 100px 0;
+  background-color: var(--bg-dark, #121212);
+  color: var(--text-on-dark, #F7F7F5);
+  border-top: 1px solid rgba(176, 141, 87, 0.2);
+  border-bottom: 1px solid rgba(176, 141, 87, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.brand-header-block {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 60px auto;
+}
+
+.brand-header-block .badge {
+  display: inline-block;
+  padding: 6px 16px;
+  background-color: rgba(176, 141, 87, 0.15);
+  color: #B08D57;
+  border: 1px solid rgba(176, 141, 87, 0.4);
+  border-radius: 999px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.brand-header-block h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: 0.05em;
+  margin-bottom: 16px;
+}
+
+.brand-header-block p {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.05rem;
+  color: #A0A0A0;
+  line-height: 1.7;
+}
+
+/* Nav Tabs */
+.brand-tabs-nav {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 48px;
+}
+
+.brand-tab-btn {
+  padding: 12px 24px;
+  background-color: #1C1C1C;
+  color: #A0A0A0;
+  border: 1px solid #2B2B2B;
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.brand-tab-btn:hover {
+  background-color: #262626;
+  color: #FFFFFF;
+  border-color: #B08D57;
+}
+
+.brand-tab-btn.active {
+  background-color: #B08D57;
+  color: #121212;
+  border-color: #B08D57;
+  box-shadow: 0 4px 20px rgba(176, 141, 87, 0.3);
+}
+
+/* Tab Panels */
+.brand-tab-content {
+  display: none;
+  animation: fadeIn 0.4s ease forwards;
+}
+
+.brand-tab-content.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Application Grids */
+.brand-asset-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 32px;
+}
+
+.brand-card {
+  background-color: #1C1C1C;
+  border: 1px solid #2B2B2B;
+  border-radius: 12px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.brand-card:hover {
+  border-color: rgba(176, 141, 87, 0.6);
+  transform: translateY(-4px);
+}
+
+.brand-card-light {
+  background-color: #FFFFFF;
+  color: #121212;
+  border: 1px solid #E5E5E5;
+}
+
+.brand-card-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #B08D57;
+}
+
+.brand-card-desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  color: #A0A0A0;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.brand-card-light .brand-card-desc {
+  color: #666666;
+}
+
+.brand-preview-wrapper {
+  width: 100%;
+  min-height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #121212;
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 20px;
+}
+
+.brand-card-light .brand-preview-wrapper {
+  background-color: #F7F7F5;
+  border: 1px solid #EFEFED;
+}
+
+.brand-preview-wrapper img {
+  max-width: 100%;
+  max-height: 180px;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Business Card Mockup */
+.business-card-mockup {
+  width: 340px;
+  height: 200px;
+  border-radius: 8px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  position: relative;
+  overflow: hidden;
+}
+
+.business-card-dark {
+  background: #121212;
+  border: 1px solid #2B2B2B;
+}
+
+.business-card-light {
+  background: #FFFFFF;
+  border: 1px solid #E5E5E5;
+  color: #121212;
+}
+
+.card-header-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.card-header-logo img {
+  width: 36px;
+  height: 36px;
+}
+
+.card-brand-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 0.15em;
+  color: #FFFFFF;
+}
+
+.business-card-light .card-brand-name {
+  color: #121212;
+}
+
+.card-person-details {
+  font-family: 'Inter', sans-serif;
+}
+
+.card-person-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #B08D57;
+  margin-bottom: 2px;
+}
+
+.card-person-title {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #888888;
+  margin-bottom: 12px;
+}
+
+.card-contact-line {
+  font-size: 0.75rem;
+  color: #A0A0A0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.business-card-light .card-contact-line {
+  color: #555555;
+}
+
+/* Legal Document & Letterhead Mockup */
+.letterhead-mockup {
+  width: 100%;
+  max-width: 480px;
+  background-color: #FFFFFF;
+  color: #121212;
+  border-radius: 6px;
+  padding: 32px 36px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  font-family: 'Inter', sans-serif;
+}
+
+.letterhead-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #121212;
+  padding-bottom: 16px;
+  margin-bottom: 24px;
+}
+
+.letterhead-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.letterhead-logo img {
+  height: 42px;
+}
+
+.letterhead-firm-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: #121212;
+}
+
+.letterhead-firm-sub {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  color: #B08D57;
+  font-weight: 600;
+}
+
+.letterhead-meta {
+  font-size: 0.7rem;
+  color: #666666;
+  text-align: right;
+  line-height: 1.4;
+}
+
+.letterhead-body-preview {
+  font-size: 0.78rem;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.letterhead-body-preview h4 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+  color: #121212;
+}
+
+/* Security ID Card Mockup */
+.id-card-mockup {
+  width: 240px;
+  height: 380px;
+  background: linear-gradient(180deg, #1C1C1C 0%, #121212 100%);
+  border: 1px solid #B08D57;
+  border-radius: 14px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6);
+  position: relative;
+}
+
+.id-card-clip-hole {
+  width: 40px;
+  height: 8px;
+  background-color: #121212;
+  border: 1px solid #444;
+  border-radius: 4px;
+  margin-bottom: 16px;
+}
+
+.id-card-logo {
+  height: 38px;
+  margin-bottom: 12px;
+}
+
+.id-card-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 2px solid #B08D57;
+  background-color: #222;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #B08D57;
+  font-size: 2rem;
+  margin-bottom: 12px;
+}
+
+.id-card-name {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #FFFFFF;
+  margin-bottom: 2px;
+}
+
+.id-card-role {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #B08D57;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.id-card-chip {
+  width: 32px;
+  height: 24px;
+  background-color: #B08D57;
+  border-radius: 4px;
+  margin-bottom: 12px;
+}
+
+.id-card-number {
+  font-family: monospace;
+  font-size: 0.75rem;
+  color: #888888;
+  letter-spacing: 0.1em;
+}
+
+/* Asset Exporter & Buttons */
+.asset-download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background-color: transparent;
+  color: #B08D57;
+  border: 1px solid #B08D57;
+  border-radius: 6px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.asset-download-btn:hover {
+  background-color: #B08D57;
+  color: #121212;
+}
+
+@media (max-width: 768px) {
+  .brand-header-block h2 {
+    font-size: 2.2rem;
+  }
+  .business-card-mockup {
+    width: 100%;
+    max-width: 320px;
+  }
+}

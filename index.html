@@ -7,6 +7,17 @@
   <meta name="description" content="EAGLE EYE is a modern private investigation firm providing confidential, ethical, and professional investigation services for individuals, businesses, and legal professionals.">
   <meta name="keywords" content="private investigation, corporate investigation, background verification, matrimonial investigation, employee verification, cyber investigation, legal support, surveillance">
   <link rel="icon" type="image/jpeg" href="/logo.jpg">
+  <style>
+    /* Critical styles to prevent Flash of Unstyled Content (FOUC) */
+    .app-preloader {
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+      background-color: #121212; z-index: 99999; display: flex;
+      flex-direction: column; align-items: center; justify-content: center;
+    }
+    .preloader-logo-img {
+      width: 220px; height: auto; display: block; margin: 0 auto;
+    }
+  </style>
 </head>
 <body>
 
@@ -14,8 +25,6 @@
   <div id="app-preloader" class="app-preloader">
     <div class="preloader-logo-wrapper">
       <img src="/logo.jpg" alt="EAGLE EYE Official Logo" class="preloader-logo-img">
-      <div class="preloader-brand-title">EAGLE EYE</div>
-      <div class="preloader-brand-sub">Private Investigation Firm</div>
     </div>
     <div class="preloader-bar">
       <div class="preloader-bar-fill"></div>
@@ -1094,27 +1103,27 @@
                 <div class="form-grid">
                   <div class="form-group">
                     <label class="form-label" for="form-name">Full Name *</label>
-                    <input type="text" id="form-name" class="form-input" placeholder="e.g. Alexander Vance" required>
+                    <input type="text" id="form-name" name="name" class="form-input" placeholder="e.g. Alexander Vance" required>
                   </div>
 
                   <div class="form-group">
                     <label class="form-label" for="form-phone">Phone Number *</label>
-                    <input type="tel" id="form-phone" class="form-input" placeholder="+1 (555) 000-0000" required>
+                    <input type="tel" id="form-phone" name="phone" class="form-input" placeholder="+1 (555) 000-0000" required>
                   </div>
 
                   <div class="form-group">
                     <label class="form-label" for="form-email">Email Address *</label>
-                    <input type="email" id="form-email" class="form-input" placeholder="confidential@domain.com" required>
+                    <input type="email" id="form-email" name="email" class="form-input" placeholder="confidential@domain.com" required>
                   </div>
 
                   <div class="form-group">
                     <label class="form-label" for="form-location">Location / Region *</label>
-                    <input type="text" id="form-location" class="form-input" placeholder="City, Country" required>
+                    <input type="text" id="form-location" name="location" class="form-input" placeholder="City, Country" required>
                   </div>
 
                   <div class="form-group">
                     <label class="form-label" for="form-service">Service Required *</label>
-                    <select id="form-service" class="form-select" required>
+                    <select id="form-service" name="service" class="form-select" required>
                       <option value="">Select Primary Service...</option>
                       <option value="personal">Personal Investigation</option>
                       <option value="corporate">Corporate Investigation</option>
@@ -1129,7 +1138,7 @@
 
                   <div class="form-group">
                     <label class="form-label" for="form-contact-method">Preferred Contact Method *</label>
-                    <select id="form-contact-method" class="form-select" required>
+                    <select id="form-contact-method" name="contactMethod" class="form-select" required>
                       <option value="phone">Secure Phone Call</option>
                       <option value="email">Encrypted Email</option>
                       <option value="whatsapp">Signal / WhatsApp Message</option>
@@ -1138,7 +1147,7 @@
 
                   <div class="form-group full-width">
                     <label class="form-label" for="form-description">Brief Description of Enquiry *</label>
-                    <textarea id="form-description" class="form-textarea" placeholder="Provide a brief summary of your key objectives and context..." required></textarea>
+                    <textarea id="form-description" name="description" class="form-textarea" placeholder="Provide a brief summary of your key objectives and context..." required></textarea>
                   </div>
                 </div>
 
@@ -1259,22 +1268,22 @@
       <form>
         <div class="form-group" style="margin-bottom: 14px;">
           <label class="form-label">Full Name *</label>
-          <input type="text" class="form-input" placeholder="Your Full Name" required>
+          <input type="text" name="name" class="form-input" placeholder="Your Full Name" required>
         </div>
 
         <div class="form-group" style="margin-bottom: 14px;">
           <label class="form-label">Phone Number *</label>
-          <input type="tel" class="form-input" placeholder="+1 (555) 000-0000" required>
+          <input type="tel" name="phone" class="form-input" placeholder="+1 (555) 000-0000" required>
         </div>
 
         <div class="form-group" style="margin-bottom: 14px;">
           <label class="form-label">Email Address *</label>
-          <input type="email" class="form-input" placeholder="confidential@domain.com" required>
+          <input type="email" name="email" class="form-input" placeholder="confidential@domain.com" required>
         </div>
 
         <div class="form-group" style="margin-bottom: 14px;">
           <label class="form-label">Service Required *</label>
-          <select class="form-select" required>
+          <select name="service" class="form-select" required>
             <option value="">Select Service...</option>
             <option value="personal">Personal Investigation</option>
             <option value="corporate">Corporate Investigation</option>
@@ -1289,7 +1298,9 @@
 
         <div class="form-group" style="margin-bottom: 20px;">
           <label class="form-label">Brief Overview *</label>
-          <textarea class="form-textarea" placeholder="Briefly describe your objectives..." required style="min-height: 90px;"></textarea>
+          <textarea name="description" class="form-textarea" placeholder="Briefly describe your objectives..." required style="min-height: 90px;"></textarea>
+          <input type="hidden" name="location" value="Unknown (Modal)">
+          <input type="hidden" name="contactMethod" value="email">
         </div>
 
         <label class="form-checkbox-label" style="margin-bottom: 20px;">

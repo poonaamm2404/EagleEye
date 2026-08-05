@@ -4,7 +4,7 @@ export function initForm() {
   const confirmationModal = document.getElementById('confirmation-modal');
 
   forms.forEach(form => {
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
       const checkbox = form.querySelector('input[type="checkbox"]');
@@ -24,31 +24,50 @@ export function initForm() {
         `;
       }
 
-      setTimeout(() => {
+      try {
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+
+        const response = await fetch('http://localhost:5000/api/consultations', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+          // Close any open consultation modal
+          const consultationModal = document.getElementById('consultation-modal');
+          consultationModal?.classList.remove('active');
+
+          // Show Confirmation Dialog Modal if present
+          if (confirmationModal) {
+            const refEl = confirmationModal.querySelector('#conf-ref-id');
+            // Use ID from DB if possible, else fallback
+            const refId = result.data?._id?.substring(result.data._id.length - 6) || 'EE-2026-OK';
+            if (refEl) refEl.textContent = 'EE-REF-' + refId.toUpperCase();
+            confirmationModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+          } else {
+            showToast(result.message || "Request submitted securely. A Senior Case Officer will contact you confidentially.");
+          }
+
+          form.reset();
+        } else {
+          showToast(result.message || "An error occurred during submission.");
+        }
+      } catch (error) {
+        console.error('Submission error:', error);
+        showToast("Network error. Please ensure the backend server is running.");
+      } finally {
         if (submitBtn) {
           submitBtn.disabled = false;
           submitBtn.innerHTML = originalText;
         }
-
-        // Close any open consultation modal
-        const consultationModal = document.getElementById('consultation-modal');
-        consultationModal?.classList.remove('active');
-
-        // Generate Case Reference ID
-        const refId = `EE-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`;
-
-        // Show Confirmation Dialog Modal if present
-        if (confirmationModal) {
-          const refEl = confirmationModal.querySelector('#conf-ref-id');
-          if (refEl) refEl.textContent = refId;
-          confirmationModal.classList.add('active');
-          document.body.style.overflow = 'hidden';
-        } else {
-          showToast(`Request submitted securely under Ref ${refId}. A Senior Case Officer will contact you confidentially.`);
-        }
-
-        form.reset();
-      }, 1200);
+      }
     });
   });
 

@@ -1,5 +1,5 @@
 export function initForm() {
-  const forms = document.querySelectorAll('form');
+  const forms = document.querySelectorAll('form:not(#chat-form)');
   const toastContainer = document.getElementById('toast-container');
   const confirmationModal = document.getElementById('confirmation-modal');
 

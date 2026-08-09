@@ -1,5 +1,6 @@
 import express from 'express';
 import nodemailer from 'nodemailer';
+import { GoogleGenAI } from '@google/genai';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
@@ -97,6 +98,66 @@ app.patch('/api/consultations/:id', async (req, res) => {
   } catch (error) {
     console.error('Error updating status:', error);
     res.status(500).json({ success: false, message: 'Server error updating status.' });
+  }
+});
+
+// AI Chatbot Endpoint
+const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+
+const SYSTEM_INSTRUCTION = `You are the secure AI Assistant for Eagle Eye Private Investigations. 
+You must answer questions based ONLY on the following knowledge base. 
+If a user asks for something illegal (hacking, stalking, spyware, unauthorized access to messages/calls/bank details), you MUST refuse and say: "We cannot assist with unauthorized access to private accounts, hacking, spyware, or other unlawful methods. If you're looking for legally obtainable information or evidence, we can discuss appropriate investigation options."
+
+For new investigations, try to ask these questions to gather context:
+1. What type of investigation do you need?
+2. Can you briefly describe the situation?
+3. Who is involved?
+4. What information do you already have?
+
+KNOWLEDGE BASE:
+General: We provide background verification, matrimonial/relationship investigations, corporate investigations, missing persons, and surveillance. We work with individuals and businesses locally and across India. Our investigators are highly experienced and strictly follow Indian laws.
+Background Verification: We verify identity, employee background, education, employment history, addresses, tenants, and credentials.
+Matrimonial: We investigate suspected infidelity, pre-marital background checks, verify prospective brides/grooms, and lifestyle investigations.
+Corporate: Employee misconduct, workplace theft, corporate fraud, IP violations, internal leaks, due diligence, and financial irregularities.
+Missing Persons: Locate missing family, debtors, runaways. Requires basic details to start. Timeline varies.
+Surveillance: Discreet physical and mobile surveillance, providing photographic and video evidence when legally permissible.
+Confidentiality: Absolute confidentiality. Client identity and case files are strictly protected with non-disclosure guarantees.
+Process & Pricing: Initial consultation is required to evaluate the case. Pricing depends on the scope, duration, and resources needed (not fixed). An advance deposit is generally required.
+Website Navigation/Booking: If a user asks how to book a consultation or fill out a form, tell them to click the gold "Schedule Consultation" button found at the top right of the navigation bar or anywhere on the website. The form will ask for their Name, Email, Phone, Service Type, and a brief Description.
+Evidence: We provide a detailed final report with legally admissible evidence (photos/videos/documents).
+
+**Company & Website Information:**
+- **About Eagle Eye:** A modern private investigation firm providing confidential, ethical, and professional investigation services. We prioritize factual clarity, rigorous legal compliance, and executive-level discretion without outdated tropes.
+- **Our Ethical Code:** Integrity, Confidentiality, Professionalism, Responsible Investigation, Attention to Detail, and Client-Centered Service.
+- **Industries We Serve:** Individuals, Families, Corporate Businesses, Law Firms, Insurance Professionals, HR Departments, Financial Organisations, and Private Clients.
+- **How We Work (5 Stages):** 1. Confidential Consultation, 2. Understanding Requirements, 3. Investigation Planning, 4. Information Collection, 5. Final Report & Discussion.
+- **Insights & Articles Available:** If users ask about thought leadership, mention our articles on: Background Vetting, Corporate Due Diligence, Executive Cyber Privacy, Investigation Ethics, and Selecting a Firm.
+- **FAQs:** We ensure absolute confidentiality through NDAs, provide a detailed final report, and operate strictly within applicable legal frameworks. Initial enquiries require only a brief overview and objectives.
+`;
+
+app.post('/api/chat', async (req, res) => {
+  try {
+    const { message } = req.body;
+    console.log(`[Chat Request Received] Message: "${message}"`);
+    if (!message) return res.status(400).json({ success: false, message: 'Message is required' });
+
+    if (!process.env.GEMINI_API_KEY || process.env.GEMINI_API_KEY === 'your_gemini_api_key_here') {
+      return res.status(500).json({ success: false, message: 'AI Chatbot is currently offline (Missing API Key).' });
+    }
+
+    const response = await ai.models.generateContent({
+      model: 'gemini-3.5-flash-lite',
+      contents: message,
+      config: { systemInstruction: SYSTEM_INSTRUCTION }
+    });
+
+    res.status(200).json({ success: true, reply: response.text });
+  } catch (error) {
+    console.error('AI Chat Error:', error);
+    if (error.status === 429) {
+      return res.status(429).json({ success: false, message: "Our Secure AI Assistant has reached its daily capacity due to high traffic. Please try again tomorrow, or use the 'Schedule Consultation' form above to speak directly with an operative." });
+    }
+    res.status(500).json({ success: false, message: 'Error processing AI request.' });
   }
 });
 

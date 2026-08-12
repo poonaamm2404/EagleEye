@@ -110,7 +110,7 @@ const articlesDetailData = {
     category: "Background Verification",
     title: "The Strategic Importance of Background Vetting in High-Stakes Decisions",
     readTime: "5 min read",
-    author: "Senior Advisory Team, EAGLE EYE",
+    author: "Senior Advisory Team, ANVESHAK",
     img: "/insight_background.png",
     content: `
       <p>In high-stakes corporate partnerships, executive hires, and private investments, relying on surface assumptions or automated online check services introduces unacceptable exposure. Automated databases often contain stale records, missed filings, or identity false positives that fail to provide complete clarity.</p>
@@ -119,7 +119,7 @@ const articlesDetailData = {
       <p>True background verification goes beyond automated search algorithms. It requires cross-referencing multi-jurisdictional court records, corporate registry filings, regulatory sanctions databases, and verified primary sources. This structured approach uncovers hidden liabilities, undisclosed conflicts of interest, and fictitious credentials before commitments are finalized.</p>
       
       <h4>Risk Mitigation Across Key Vectors</h4>
-      <p>Whether vetting a prospective C-suite officer or evaluating a strategic joint-venture partner, thorough intelligence ensures that decision-makers operate with total transparency. At EAGLE EYE, every background verification enquiry is executed within strict legal frameworks, ensuring that all gathered intelligence is factual, objective, and court-admissible.</p>
+      <p>Whether vetting a prospective C-suite officer or evaluating a strategic joint-venture partner, thorough intelligence ensures that decision-makers operate with total transparency. At ANVESHAK, every background verification enquiry is executed within strict legal frameworks, ensuring that all gathered intelligence is factual, objective, and court-admissible.</p>
     `
   },
   'corp-diligence': {
@@ -167,7 +167,7 @@ const articlesDetailData = {
       <p>Professional private investigation operates within defined statutory boundaries—utilizing public records, lawful physical observation, open-source intelligence, and voluntary interview statements. Every piece of evidence gathered must maintain a strict, verifiable chain of custody to withstand legal scrutiny.</p>
       
       <h4>The Non-Negotiable Imperative of Ethics</h4>
-      <p>At EAGLE EYE, we adhere to strict ethical standards. Every client enquiry undergoes a legal feasibility review prior to engagement, ensuring that our work protects client interests while operating with complete legal integrity.</p>
+      <p>At ANVESHAK, we adhere to strict ethical standards. Every client enquiry undergoes a legal feasibility review prior to engagement, ensuring that our work protects client interests while operating with complete legal integrity.</p>
     `
   },
   'selecting-firm': {

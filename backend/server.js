@@ -36,7 +36,7 @@ app.post('/api/consultations', async (req, res) => {
     if (process.env.GMAIL_USER && process.env.GMAIL_PASS) {
       // 1. Alert to Agency
       const agencyMailOptions = {
-        from: `"EagleEye Agency" <${process.env.GMAIL_USER}>`,
+        from: `"Anveshak Agency" <${process.env.GMAIL_USER}>`,
         to: process.env.GMAIL_USER, // Sending to yourself
         subject: `🚨 NEW LEAD: ${savedConsultation.service} - ${savedConsultation.name}`,
         html: `
@@ -53,19 +53,19 @@ app.post('/api/consultations', async (req, res) => {
 
       // 2. Confirmation to Client
       const clientMailOptions = {
-        from: `"EagleEye Operations" <${process.env.GMAIL_USER}>`,
+        from: `"Anveshak Operations" <${process.env.GMAIL_USER}>`,
         to: savedConsultation.email, // Send to the user's email
         subject: `Confidential: Consultation Request Received`,
         html: `
           <div style="font-family: Arial, sans-serif; color: #333; line-height: 1.6; max-width: 600px; margin: 0 auto; border: 1px solid #eee; padding: 20px; border-radius: 8px;">
-            <h2 style="color: #c49a6c; margin-top: 0;">EagleEye Operations Center</h2>
+            <h2 style="color: #c49a6c; margin-top: 0;">Anveshak Operations Center</h2>
             <p>Dear ${savedConsultation.name},</p>
             <p>This is an automated confirmation that your secure consultation request has been successfully received by our team.</p>
             <p><strong>Reference Service:</strong> ${savedConsultation.service}</p>
             <p>One of our specialists is currently reviewing your brief and will contact you shortly via your preferred method (${savedConsultation.contactMethod}).</p>
             <p style="color: #e74c3c; font-size: 13px; font-weight: bold; margin-top: 30px;">For your security, please do not reply to this automated email with sensitive case details.</p>
             <hr style="border: none; border-top: 1px solid #eee; margin: 20px 0;">
-            <p style="font-size: 14px; color: #777;">Best regards,<br><strong>EagleEye Agency</strong></p>
+            <p style="font-size: 14px; color: #777;">Best regards,<br><strong>Anveshak Agency</strong></p>
           </div>
         `
       };
@@ -104,7 +104,7 @@ app.patch('/api/consultations/:id', async (req, res) => {
 // AI Chatbot Endpoint
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
-const SYSTEM_INSTRUCTION = `You are the secure AI Assistant for Eagle Eye Private Investigations. 
+const SYSTEM_INSTRUCTION = `You are the secure AI Assistant for Anveshak Private Investigations. 
 You must answer questions based ONLY on the following knowledge base. 
 If a user asks for something illegal (hacking, stalking, spyware, unauthorized access to messages/calls/bank details), you MUST refuse and say: "We cannot assist with unauthorized access to private accounts, hacking, spyware, or other unlawful methods. If you're looking for legally obtainable information or evidence, we can discuss appropriate investigation options."
 
@@ -127,7 +127,7 @@ Website Navigation/Booking: If a user asks how to book a consultation or fill ou
 Evidence: We provide a detailed final report with legally admissible evidence (photos/videos/documents).
 
 **Company & Website Information:**
-- **About Eagle Eye:** A modern private investigation firm providing confidential, ethical, and professional investigation services. We prioritize factual clarity, rigorous legal compliance, and executive-level discretion without outdated tropes.
+- **About Anveshak:** A modern private investigation firm providing confidential, ethical, and professional investigation services. We prioritize factual clarity, rigorous legal compliance, and executive-level discretion without outdated tropes.
 - **Our Ethical Code:** Integrity, Confidentiality, Professionalism, Responsible Investigation, Attention to Detail, and Client-Centered Service.
 - **Industries We Serve:** Individuals, Families, Corporate Businesses, Law Firms, Insurance Professionals, HR Departments, Financial Organisations, and Private Clients.
 - **How We Work (5 Stages):** 1. Confidential Consultation, 2. Understanding Requirements, 3. Investigation Planning, 4. Information Collection, 5. Final Report & Discussion.
@@ -162,6 +162,6 @@ app.post('/api/chat', async (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`EagleEye Secure Backend API running on port ${PORT}`);
+  console.log(`Anveshak Secure Backend API running on port ${PORT}`);
 });
 

@@ -150,41 +150,47 @@ button {
 }
 
 .btn-primary {
-  background-color: var(--accent-gold);
-  color: #FFFFFF;
-  border: 1px solid var(--accent-gold);
-  box-shadow: 0 4px 14px rgba(176, 141, 87, 0.25);
+  background: linear-gradient(135deg, #C5A059 0%, #A8863E 100%);
+  color: #060A12;
+  font-weight: 700;
+  border: 1px solid #DFBF7D;
+  box-shadow: 0 4px 16px rgba(197, 160, 89, 0.25);
 }
 
 .btn-primary:hover {
-  background-color: var(--accent-gold-hover);
-  border-color: var(--accent-gold-hover);
+  background: linear-gradient(135deg, #DFBF7D 0%, #C5A059 100%);
+  border-color: #F3DEB5;
+  color: #060A12;
   transform: translateY(-2px);
-  box-shadow: var(--shadow-gold);
+  box-shadow: 0 8px 25px rgba(197, 160, 89, 0.35);
 }
 
 .btn-secondary {
-  background-color: transparent;
+  background-color: rgba(22, 35, 59, 0.6);
   color: var(--text-main);
-  border: 1px solid var(--border-light);
+  border: 1px solid rgba(197, 160, 89, 0.35);
+  backdrop-filter: blur(8px);
 }
 
 .btn-secondary:hover {
-  border-color: var(--text-main);
-  background-color: var(--bg-secondary);
+  border-color: var(--accent-gold);
+  color: var(--accent-gold-hover);
+  background-color: rgba(197, 160, 89, 0.14);
   transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
 }
 
 .btn-outline-dark {
   background-color: transparent;
-  color: var(--text-on-dark);
-  border: 1px solid var(--border-dark);
+  color: var(--text-main);
+  border: 1px solid var(--accent-gold-border);
 }
 
 .btn-outline-dark:hover {
   border-color: var(--accent-gold);
-  color: var(--accent-gold);
-  background-color: rgba(176, 141, 87, 0.08);
+  color: var(--accent-gold-hover);
+  background-color: rgba(197, 160, 89, 0.1);
+  transform: translateY(-2px);
 }
 
 .btn-icon {
@@ -211,15 +217,15 @@ button {
 }
 
 .badge-gold {
-  background-color: var(--accent-gold-light);
+  background-color: rgba(197, 160, 89, 0.12);
   color: var(--accent-gold-hover);
-  border: 1px solid var(--accent-gold-border);
+  border: 1px solid rgba(197, 160, 89, 0.3);
 }
 
 .badge-forest {
-  background-color: var(--accent-forest-light);
-  color: var(--accent-forest);
-  border: 1px solid rgba(46, 74, 61, 0.2);
+  background-color: rgba(58, 99, 81, 0.2);
+  color: #75C9A3;
+  border: 1px solid rgba(58, 99, 81, 0.4);
 }
 
 /* Animations */
@@ -229,7 +235,7 @@ button {
 }
 
 .animate-fade-in {
-  animation: fadeIn 0.6s ease forward;
+  animation: fadeIn 0.6s ease forwards;
 }
 
 /* Grid System */
@@ -291,13 +297,14 @@ button {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: #121212;
+  background-color: #0A101D;
+  background-image: radial-gradient(circle at 50% 45%, rgba(22, 35, 59, 0.8) 0%, #060A12 85%);
   z-index: 99999;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  transition: opacity 0.5s ease, visibility 0.5s ease;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
 }
 
 .app-preloader.fade-out {
@@ -315,9 +322,9 @@ button {
 .preloader-logo-img {
   width: 220px;
   height: auto;
-  border-radius: 12px;
-  border: 1px solid rgba(176, 141, 87, 0.5);
-  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.9), 0 0 30px rgba(176, 141, 87, 0.25);
+  border-radius: 8px;
+  border: 1px solid rgba(197, 160, 89, 0.3);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8), 0 0 35px rgba(197, 160, 89, 0.2);
   margin: 0 auto;
   display: block;
 }
@@ -335,19 +342,20 @@ button {
   font-family: var(--font-body);
   font-size: 0.75rem;
   letter-spacing: 0.25em;
-  color: #B08D57;
+  color: var(--accent-gold);
   text-transform: uppercase;
   margin-top: 4px;
 }
 
 .preloader-bar {
-  width: 200px;
+  width: 220px;
   height: 3px;
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 4px;
   overflow: hidden;
   position: relative;
   margin: 0 auto;
+  box-shadow: 0 0 10px rgba(197, 160, 89, 0.3);
 }
 
 .preloader-bar-fill {
@@ -356,7 +364,7 @@ button {
   left: 0;
   height: 100%;
   width: 0%;
-  background-color: #B08D57;
+  background: linear-gradient(90deg, #A8863E, #DFBF7D);
   animation: preloaderFill 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
@@ -377,17 +385,17 @@ button {
   width: auto;
   object-fit: contain;
   border-radius: 6px;
-  border: 1px solid rgba(176, 141, 87, 0.4);
-  background-color: #FFFFFF;
-  padding: 3px;
-  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(197, 160, 89, 0.3);
+  background-color: transparent;
+  padding: 0;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
   transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .navbar-logo-link:hover .navbar-logo-img {
   transform: scale(1.04);
-  border-color: #B08D57;
-  box-shadow: 0 6px 18px rgba(176, 141, 87, 0.3);
+  border-color: var(--accent-gold);
+  box-shadow: 0 6px 20px rgba(197, 160, 89, 0.3);
 }
 
 .footer-logo-img {
@@ -395,11 +403,11 @@ button {
   width: auto;
   object-fit: contain;
   border-radius: 8px;
-  border: 1px solid rgba(176, 141, 87, 0.5);
-  background-color: #FFFFFF;
-  padding: 6px;
+  border: 1px solid rgba(197, 160, 89, 0.35);
+  background-color: transparent;
+  padding: 0;
   margin-bottom: 20px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.7);
 }
 
 /* AI CHATBOT STYLES */
@@ -407,13 +415,13 @@ button {
   position: fixed;
   bottom: 30px;
   right: 30px;
-  width: 60px;
-  height: 60px;
+  width: 58px;
+  height: 58px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--accent-gold), #937141);
-  color: #fff;
-  border: none;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.3), 0 0 0 2px rgba(176, 141, 87, 0.2);
+  background: linear-gradient(135deg, #C5A059, #A8863E);
+  color: #060A12;
+  border: 1px solid #DFBF7D;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5), 0 0 20px rgba(197, 160, 89, 0.3);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -423,25 +431,26 @@ button {
 }
 
 .chat-toggle-btn:hover {
-  transform: scale(1.05) translateY(-2px);
-  box-shadow: 0 6px 20px rgba(176, 141, 87, 0.4), 0 0 0 2px rgba(176, 141, 87, 0.4);
+  transform: scale(1.06) translateY(-2px);
+  background: linear-gradient(135deg, #DFBF7D, #C5A059);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6), 0 0 25px rgba(197, 160, 89, 0.5);
 }
 
 .chat-toggle-btn svg {
-  width: 28px;
-  height: 28px;
+  width: 26px;
+  height: 26px;
 }
 
 .chat-window {
   position: fixed;
   bottom: 100px;
   right: 30px;
-  width: 350px;
-  height: 500px;
-  background-color: var(--bg-secondary);
-  border: 1px solid var(--border-light);
+  width: 360px;
+  height: 520px;
+  background-color: #10192A;
+  border: 1px solid rgba(197, 160, 89, 0.35);
   border-radius: 12px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 20px rgba(197, 160, 89, 0.15);
   display: none;
   flex-direction: column;
   z-index: 9999;
@@ -456,8 +465,8 @@ button {
 
 .chat-header {
   padding: 16px 20px;
-  background-color: var(--bg-tertiary);
-  border-bottom: 1px solid var(--border-light);
+  background-color: #0A101D;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -473,15 +482,16 @@ button {
   width: 32px;
   height: 32px;
   color: var(--accent-gold);
-  background-color: rgba(176, 141, 87, 0.1);
+  background-color: rgba(197, 160, 89, 0.12);
   padding: 6px;
   border-radius: 50%;
+  border: 1px solid rgba(197, 160, 89, 0.3);
 }
 
 .chat-header h4 {
   font-family: var(--font-heading);
   color: var(--text-main);
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   margin: 0;
 }
 
@@ -513,7 +523,7 @@ button {
 }
 
 #close-chat:hover {
-  color: var(--text-main);
+  color: var(--accent-gold);
   background-color: rgba(255,255,255,0.05);
 }
 
@@ -529,6 +539,7 @@ button {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  background-color: #10192A;
 }
 
 .chat-message {
@@ -541,19 +552,19 @@ button {
 }
 
 .message-bot {
-  background-color: var(--bg-tertiary);
-  color: var(--text-secondary);
+  background-color: #16233B;
+  color: var(--text-main);
   align-self: flex-start;
   border-bottom-left-radius: 2px;
-  border: 1px solid var(--border-light);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .message-user {
-  background-color: var(--accent-gold);
-  color: #fff;
+  background: linear-gradient(135deg, #C5A059, #A8863E);
+  color: #060A12;
   align-self: flex-end;
   border-bottom-right-radius: 2px;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 /* Markdown styling inside chat */
@@ -578,40 +589,41 @@ button {
 }
 .chat-message strong {
   font-weight: 600;
-  color: var(--text-main);
+  color: var(--accent-gold);
 }
 .message-user strong {
-  color: #fff;
+  color: #060A12;
 }
 
 .chat-form {
-  padding: 16px;
-  background-color: var(--bg-tertiary);
-  border-top: 1px solid var(--border-light);
+  padding: 14px 16px;
+  background-color: #0A101D;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
   gap: 10px;
 }
 
 .chat-form input {
   flex: 1;
-  background-color: var(--bg-primary);
-  border: 1px solid var(--border-light);
+  background-color: #16233B;
+  border: 1px solid rgba(255, 255, 255, 0.12);
   color: var(--text-main);
-  padding: 10px 14px;
+  padding: 10px 16px;
   border-radius: 20px;
   font-family: var(--font-body);
   font-size: 0.9rem;
   outline: none;
-  transition: border-color 0.2s;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .chat-form input:focus {
   border-color: var(--accent-gold);
+  box-shadow: 0 0 0 2px rgba(197, 160, 89, 0.2);
 }
 
 .chat-form button {
-  background-color: var(--accent-gold);
-  color: #fff;
+  background: linear-gradient(135deg, #C5A059, #A8863E);
+  color: #060A12;
   border: none;
   width: 40px;
   height: 40px;
@@ -624,8 +636,8 @@ button {
 }
 
 .chat-form button:hover {
-  transform: scale(1.05);
-  background-color: #937141;
+  transform: scale(1.06);
+  background: linear-gradient(135deg, #DFBF7D, #C5A059);
 }
 
 .chat-form button svg {
@@ -644,7 +656,7 @@ button {
 .typing-indicator span {
   width: 6px;
   height: 6px;
-  background-color: var(--text-muted);
+  background-color: var(--accent-gold);
   border-radius: 50%;
   animation: typing 1.4s infinite ease-in-out both;
 }

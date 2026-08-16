@@ -16,7 +16,9 @@ app.use(cors());
 app.use(express.json());
 
 // Database Connection
-mongoose.connect(process.env.MONGO_URI)
+mongoose.connect(process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/anveshak')
+  .then(() => console.log('Connected to MongoDB'))
+  .catch(err => console.warn('MongoDB connection note:', err.message));
 // Configure Nodemailer Transporter
 const transporter = nodemailer.createTransport({
   service: 'gmail',
@@ -126,8 +128,9 @@ Process & Pricing: Initial consultation is required to evaluate the case. Pricin
 Website Navigation/Booking: If a user asks how to book a consultation or fill out a form, tell them to click the gold "Schedule Consultation" button found at the top right of the navigation bar or anywhere on the website. The form will ask for their Name, Email, Phone, Service Type, and a brief Description.
 Evidence: We provide a detailed final report with legally admissible evidence (photos/videos/documents).
 
-**Company & Website Information:**
+- **Company & Website Information:**
 - **About Anveshak:** A modern private investigation firm providing confidential, ethical, and professional investigation services. We prioritize factual clarity, rigorous legal compliance, and executive-level discretion without outdated tropes.
+- **Official Contact Email:** anveshak.intelligence@gmail.com
 - **Our Ethical Code:** Integrity, Confidentiality, Professionalism, Responsible Investigation, Attention to Detail, and Client-Centered Service.
 - **Industries We Serve:** Individuals, Families, Corporate Businesses, Law Firms, Insurance Professionals, HR Departments, Financial Organisations, and Private Clients.
 - **How We Work (5 Stages):** 1. Confidential Consultation, 2. Understanding Requirements, 3. Investigation Planning, 4. Information Collection, 5. Final Report & Discussion.

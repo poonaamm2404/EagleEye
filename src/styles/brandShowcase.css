@@ -2,10 +2,10 @@
 
 .brand-showcase-section {
   padding: 100px 0;
-  background-color: var(--bg-dark, #121212);
-  color: var(--text-on-dark, #F7F7F5);
-  border-top: 1px solid rgba(176, 141, 87, 0.2);
-  border-bottom: 1px solid rgba(176, 141, 87, 0.2);
+  background-color: #060A12;
+  color: var(--text-on-dark, #F0F4F8);
+  border-top: 1px solid rgba(197, 160, 89, 0.2);
+  border-bottom: 1px solid rgba(197, 160, 89, 0.2);
   position: relative;
   overflow: hidden;
 }
@@ -19,9 +19,9 @@
 .brand-header-block .badge {
   display: inline-block;
   padding: 6px 16px;
-  background-color: rgba(176, 141, 87, 0.15);
-  color: #B08D57;
-  border: 1px solid rgba(176, 141, 87, 0.4);
+  background-color: rgba(197, 160, 89, 0.12);
+  color: #DFBF7D;
+  border: 1px solid rgba(197, 160, 89, 0.35);
   border-radius: 999px;
   font-family: 'Inter', sans-serif;
   font-size: 0.75rem;
@@ -43,7 +43,7 @@
 .brand-header-block p {
   font-family: 'Inter', sans-serif;
   font-size: 1.05rem;
-  color: #A0A0A0;
+  color: var(--text-secondary);
   line-height: 1.7;
 }
 
@@ -58,9 +58,9 @@
 
 .brand-tab-btn {
   padding: 12px 24px;
-  background-color: #1C1C1C;
-  color: #A0A0A0;
-  border: 1px solid #2B2B2B;
+  background-color: #10192A;
+  color: var(--text-secondary);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 8px;
   font-family: 'Inter', sans-serif;
   font-size: 0.88rem;
@@ -71,16 +71,17 @@
 }
 
 .brand-tab-btn:hover {
-  background-color: #262626;
+  background-color: #16233B;
   color: #FFFFFF;
-  border-color: #B08D57;
+  border-color: var(--accent-gold);
 }
 
 .brand-tab-btn.active {
-  background-color: #B08D57;
-  color: #121212;
-  border-color: #B08D57;
-  box-shadow: 0 4px 20px rgba(176, 141, 87, 0.3);
+  background: linear-gradient(135deg, #C5A059, #A8863E);
+  color: #060A12;
+  font-weight: 700;
+  border-color: #DFBF7D;
+  box-shadow: 0 4px 20px rgba(197, 160, 89, 0.35);
 }
 
 /* Tab Panels */
@@ -106,25 +107,27 @@
 }
 
 .brand-card {
-  background-color: #1C1C1C;
-  border: 1px solid #2B2B2B;
+  background-color: #10192A;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 12px;
   padding: 32px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  transition: transform 0.3s ease, border-color 0.3s ease;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
 }
 
 .brand-card:hover {
-  border-color: rgba(176, 141, 87, 0.6);
+  border-color: rgba(197, 160, 89, 0.45);
   transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8), 0 0 20px rgba(197, 160, 89, 0.12);
 }
 
 .brand-card-light {
-  background-color: #FFFFFF;
-  color: #121212;
-  border: 1px solid #E5E5E5;
+  background-color: #16233B;
+  color: #F0F4F8;
+  border: 1px solid rgba(197, 160, 89, 0.3);
 }
 
 .brand-card-title {
@@ -132,19 +135,19 @@
   font-size: 1.5rem;
   font-weight: 700;
   margin-bottom: 8px;
-  color: #B08D57;
+  color: var(--accent-gold);
 }
 
 .brand-card-desc {
   font-family: 'Inter', sans-serif;
   font-size: 0.85rem;
-  color: #A0A0A0;
+  color: var(--text-secondary);
   text-align: center;
   margin-bottom: 24px;
 }
 
 .brand-card-light .brand-card-desc {
-  color: #666666;
+  color: var(--text-secondary);
 }
 
 .brand-preview-wrapper {
@@ -153,15 +156,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #121212;
+  background-color: #060A12;
   border-radius: 8px;
+  border: 1px solid rgba(197, 160, 89, 0.2);
   padding: 24px;
   margin-bottom: 20px;
 }
 
 .brand-card-light .brand-preview-wrapper {
-  background-color: #F7F7F5;
-  border: 1px solid #EFEFED;
+  background-color: #0A101D;
+  border: 1px solid rgba(197, 160, 89, 0.25);
 }
 
 .brand-preview-wrapper img {
@@ -180,20 +184,20 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
   position: relative;
   overflow: hidden;
 }
 
 .business-card-dark {
-  background: #121212;
-  border: 1px solid #2B2B2B;
+  background: #0A101D;
+  border: 1px solid rgba(197, 160, 89, 0.35);
 }
 
 .business-card-light {
-  background: #FFFFFF;
-  border: 1px solid #E5E5E5;
-  color: #121212;
+  background: #10192A;
+  border: 1px solid rgba(197, 160, 89, 0.3);
+  color: #F0F4F8;
 }
 
 .card-header-logo {
@@ -216,7 +220,7 @@
 }
 
 .business-card-light .card-brand-name {
-  color: #121212;
+  color: #FFFFFF;
 }
 
 .card-person-details {
@@ -226,7 +230,7 @@
 .card-person-name {
   font-size: 1.05rem;
   font-weight: 700;
-  color: #B08D57;
+  color: var(--accent-gold);
   margin-bottom: 2px;
 }
 
@@ -234,13 +238,13 @@
   font-size: 0.72rem;
   text-transform: uppercase;
   letter-spacing: 0.15em;
-  color: #888888;
+  color: var(--text-muted);
   margin-bottom: 12px;
 }
 
 .card-contact-line {
   font-size: 0.75rem;
-  color: #A0A0A0;
+  color: var(--text-secondary);
   display: flex;
   align-items: center;
   gap: 8px;
@@ -248,18 +252,19 @@
 }
 
 .business-card-light .card-contact-line {
-  color: #555555;
+  color: var(--text-secondary);
 }
 
 /* Legal Document & Letterhead Mockup */
 .letterhead-mockup {
   width: 100%;
   max-width: 480px;
-  background-color: #FFFFFF;
-  color: #121212;
+  background-color: #10192A;
+  color: #F0F4F8;
+  border: 1px solid rgba(197, 160, 89, 0.35);
   border-radius: 6px;
   padding: 32px 36px;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.85);
   font-family: 'Inter', sans-serif;
 }
 
@@ -267,7 +272,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 2px solid #121212;
+  border-bottom: 1px solid rgba(197, 160, 89, 0.35);
   padding-bottom: 16px;
   margin-bottom: 24px;
 }
@@ -287,27 +292,27 @@
   font-size: 1.3rem;
   font-weight: 700;
   letter-spacing: 0.15em;
-  color: #121212;
+  color: #FFFFFF;
 }
 
 .letterhead-firm-sub {
   font-size: 0.65rem;
   text-transform: uppercase;
   letter-spacing: 0.25em;
-  color: #B08D57;
+  color: var(--accent-gold);
   font-weight: 600;
 }
 
 .letterhead-meta {
   font-size: 0.7rem;
-  color: #666666;
+  color: var(--text-muted);
   text-align: right;
   line-height: 1.4;
 }
 
 .letterhead-body-preview {
   font-size: 0.78rem;
-  color: #333333;
+  color: var(--text-secondary);
   line-height: 1.6;
 }
 
@@ -315,29 +320,29 @@
   font-family: 'Cormorant Garamond', serif;
   font-size: 1.1rem;
   margin-bottom: 8px;
-  color: #121212;
+  color: var(--accent-gold);
 }
 
 /* Security ID Card Mockup */
 .id-card-mockup {
   width: 240px;
   height: 380px;
-  background: linear-gradient(180deg, #1C1C1C 0%, #121212 100%);
-  border: 1px solid #B08D57;
+  background: linear-gradient(180deg, #10192A 0%, #060A12 100%);
+  border: 1px solid rgba(197, 160, 89, 0.4);
   border-radius: 14px;
   padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.85);
   position: relative;
 }
 
 .id-card-clip-hole {
   width: 40px;
   height: 8px;
-  background-color: #121212;
-  border: 1px solid #444;
+  background-color: #060A12;
+  border: 1px solid rgba(197, 160, 89, 0.3);
   border-radius: 4px;
   margin-bottom: 16px;
 }
@@ -351,12 +356,12 @@
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  border: 2px solid #B08D57;
-  background-color: #222;
+  border: 2px solid var(--accent-gold);
+  background-color: #16233B;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #B08D57;
+  color: var(--accent-gold);
   font-size: 2rem;
   margin-bottom: 12px;
 }
@@ -373,7 +378,7 @@
   font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 0.15em;
-  color: #B08D57;
+  color: var(--accent-gold);
   font-weight: 600;
   margin-bottom: 16px;
 }
@@ -381,7 +386,7 @@
 .id-card-chip {
   width: 32px;
   height: 24px;
-  background-color: #B08D57;
+  background-color: var(--accent-gold);
   border-radius: 4px;
   margin-bottom: 12px;
 }
@@ -389,7 +394,7 @@
 .id-card-number {
   font-family: monospace;
   font-size: 0.75rem;
-  color: #888888;
+  color: var(--text-muted);
   letter-spacing: 0.1em;
 }
 
@@ -399,9 +404,9 @@
   align-items: center;
   gap: 8px;
   padding: 8px 16px;
-  background-color: transparent;
-  color: #B08D57;
-  border: 1px solid #B08D57;
+  background-color: rgba(197, 160, 89, 0.12);
+  color: var(--accent-gold-hover);
+  border: 1px solid rgba(197, 160, 89, 0.35);
   border-radius: 6px;
   font-family: 'Inter', sans-serif;
   font-size: 0.8rem;
@@ -412,8 +417,8 @@
 }
 
 .asset-download-btn:hover {
-  background-color: #B08D57;
-  color: #121212;
+  background: linear-gradient(135deg, #DFBF7D, #C5A059);
+  color: #060A12;
 }
 
 @media (max-width: 768px) {

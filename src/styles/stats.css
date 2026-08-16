@@ -1,10 +1,10 @@
 /* Statistics Bar Styles */
 .stats-section {
-  background-color: var(--bg-dark);
+  background-color: #060A12;
   color: var(--text-on-dark);
   padding: 80px 0;
-  border-top: 1px solid var(--border-dark);
-  border-bottom: 1px solid var(--border-dark);
+  border-top: 1px solid rgba(197, 160, 89, 0.2);
+  border-bottom: 1px solid rgba(197, 160, 89, 0.2);
   position: relative;
   overflow: hidden;
 }
@@ -28,14 +28,17 @@
   right: 0;
   height: 60%;
   width: 1px;
-  background-color: var(--border-dark);
+  background-color: rgba(255, 255, 255, 0.08);
 }
 
 .stat-number {
   font-family: var(--font-heading);
   font-size: 3.8rem;
   font-weight: 700;
-  color: var(--accent-gold);
+  color: #DFBF7D;
+  background: linear-gradient(135deg, #F3DEB5 0%, #C5A059 50%, #DFBF7D 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   line-height: 1;
   margin-bottom: 12px;
   letter-spacing: -0.02em;
@@ -44,7 +47,7 @@
 .stat-label {
   font-size: 0.95rem;
   font-weight: 500;
-  color: var(--text-on-dark-muted);
+  color: var(--text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }

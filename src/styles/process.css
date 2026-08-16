@@ -18,7 +18,7 @@
   left: 5%;
   right: 5%;
   height: 2px;
-  background-color: var(--border-light);
+  background-color: rgba(255, 255, 255, 0.1);
   z-index: 1;
 }
 
@@ -28,7 +28,8 @@
   left: 5%;
   width: 0%;
   height: 2px;
-  background-color: var(--accent-gold);
+  background: linear-gradient(90deg, #C5A059, #DFBF7D);
+  box-shadow: 0 0 10px rgba(197, 160, 89, 0.5);
   z-index: 2;
   transition: width 0.5s ease;
 }
@@ -45,8 +46,8 @@
   width: 72px;
   height: 72px;
   border-radius: 50%;
-  background-color: var(--bg-primary);
-  border: 2px solid var(--border-light);
+  background-color: #10192A;
+  border: 2px solid rgba(255, 255, 255, 0.12);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -56,16 +57,16 @@
   font-weight: 700;
   color: var(--text-muted);
   transition: var(--transition-smooth);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
 }
 
 .process-step:hover .step-node,
 .process-step.active .step-node {
   border-color: var(--accent-gold);
-  color: var(--accent-gold);
-  background-color: var(--accent-gold-light);
-  transform: scale(1.08);
-  box-shadow: var(--shadow-gold);
+  color: #060A12;
+  background: linear-gradient(135deg, #DFBF7D, #C5A059);
+  transform: scale(1.1);
+  box-shadow: 0 0 25px rgba(197, 160, 89, 0.4), 0 8px 20px rgba(0, 0, 0, 0.6);
 }
 
 .step-title {
@@ -79,7 +80,7 @@
 
 .process-step:hover .step-title,
 .process-step.active .step-title {
-  color: var(--accent-gold);
+  color: var(--accent-gold-hover);
 }
 
 .step-desc {
@@ -91,14 +92,15 @@
 /* Detail Display Card Below Timeline */
 .process-detail-card {
   margin-top: 48px;
-  background-color: var(--bg-secondary);
-  border: 1px solid var(--border-light);
+  background-color: #10192A;
+  border: 1px solid rgba(197, 160, 89, 0.3);
   border-radius: var(--radius-md);
   padding: 40px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 32px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
 }
 
 .detail-info {

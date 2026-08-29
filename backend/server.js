@@ -138,8 +138,8 @@ Evidence: We provide a detailed final report with legally admissible evidence (p
 - **FAQs:** We ensure absolute confidentiality through NDAs, provide a detailed final report, and operate strictly within applicable legal frameworks. Initial enquiries require only a brief overview and objectives.
 `;
 
-// AI Chatbot Helper with Multi-Model Fallback
-const FALLBACK_MODELS = ['gemini-3.6-flash', 'gemini-3.5-flash', 'gemini-3.1-flash-lite', 'gemini-flash-latest'];
+// AI Chatbot Helper with Multi-Model Fallback (Fastest first)
+const FALLBACK_MODELS = ['gemini-3.1-flash-lite', 'gemini-3.5-flash', 'gemini-3.6-flash', 'gemini-flash-latest'];
 
 async function generateChatResponse(message) {
   let lastError = null;
@@ -148,7 +148,10 @@ async function generateChatResponse(message) {
       const response = await ai.models.generateContent({
         model: modelName,
         contents: message,
-        config: { systemInstruction: SYSTEM_INSTRUCTION }
+        config: { 
+          systemInstruction: SYSTEM_INSTRUCTION,
+          maxOutputTokens: 350
+        }
       });
       if (response && response.text) {
         return response.text;

@@ -1,3 +1,5 @@
+import { API_BASE_URL } from './config.js';
+
 // State
 let latestId = null;
 let notificationsEnabled = false;
@@ -57,7 +59,7 @@ window.toggleDesc = (id) => {
 // Global function to update status
 window.updateStatus = async (id, status) => {
   try {
-    const res = await fetch(`http://localhost:5000/api/consultations/${id}`, {
+    const res = await fetch(`${API_BASE_URL}/api/consultations/${id}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ status })
@@ -74,7 +76,7 @@ window.updateStatus = async (id, status) => {
 async function fetchRequests() {
   if (!isAuthenticated) return;
   try {
-    const response = await fetch('http://localhost:5000/api/consultations');
+    const response = await fetch(`${API_BASE_URL}/api/consultations`);
     if (!response.ok) return;
     
     const result = await response.json();

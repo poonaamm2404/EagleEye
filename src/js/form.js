@@ -1,3 +1,5 @@
+import { API_BASE_URL } from './config.js';
+
 export function initForm() {
   const forms = document.querySelectorAll('form:not(#chat-form)');
   const toastContainer = document.getElementById('toast-container');
@@ -28,7 +30,7 @@ export function initForm() {
         const formData = new FormData(form);
         const data = Object.fromEntries(formData.entries());
 
-        const response = await fetch('http://localhost:5000/api/consultations', {
+        const response = await fetch(`${API_BASE_URL}/api/consultations`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'

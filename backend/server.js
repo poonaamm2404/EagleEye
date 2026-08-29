@@ -138,6 +138,29 @@ Evidence: We provide a detailed final report with legally admissible evidence (p
 - **FAQs:** We ensure absolute confidentiality through NDAs, provide a detailed final report, and operate strictly within applicable legal frameworks. Initial enquiries require only a brief overview and objectives.
 `;
 
+// AI Chatbot Helper with Multi-Model Fallback
+const FALLBACK_MODELS = ['gemini-3.6-flash', 'gemini-3.5-flash', 'gemini-3.1-flash-lite', 'gemini-flash-latest'];
+
+async function generateChatResponse(message) {
+  let lastError = null;
+  for (const modelName of FALLBACK_MODELS) {
+    try {
+      const response = await ai.models.generateContent({
+        model: modelName,
+        contents: message,
+        config: { systemInstruction: SYSTEM_INSTRUCTION }
+      });
+      if (response && response.text) {
+        return response.text;
+      }
+    } catch (err) {
+      console.warn(`[Chatbot] Model ${modelName} encountered: ${err.status || err.message}. Trying next fallback...`);
+      lastError = err;
+    }
+  }
+  throw lastError;
+}
+
 app.post('/api/chat', async (req, res) => {
   try {
     const { message } = req.body;
@@ -148,19 +171,17 @@ app.post('/api/chat', async (req, res) => {
       return res.status(500).json({ success: false, message: 'AI Chatbot is currently offline (Missing API Key).' });
     }
 
-    const response = await ai.models.generateContent({
-      model: 'gemini-3.6-flash',
-      contents: message,
-      config: { systemInstruction: SYSTEM_INSTRUCTION }
-    });
-
-    res.status(200).json({ success: true, reply: response.text });
+    const reply = await generateChatResponse(message);
+    res.status(200).json({ success: true, reply });
   } catch (error) {
     console.error('AI Chat Error:', error);
-    if (error.status === 429) {
+    if (error?.status === 429) {
       return res.status(429).json({ success: false, message: "Our Secure AI Assistant has reached its daily capacity due to high traffic. Please try again tomorrow, or use the 'Schedule Consultation' form above to speak directly with an operative." });
     }
-    res.status(500).json({ success: false, message: 'Error processing AI request.' });
+    if (error?.status === 503 || error?.code === 503) {
+      return res.status(503).json({ success: false, message: "The AI network is experiencing a brief high-demand spike. Please try asking again in a moment." });
+    }
+    res.status(500).json({ success: false, message: 'Error processing AI request. Please try again shortly.' });
   }
 });
 

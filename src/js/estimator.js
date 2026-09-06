@@ -80,19 +80,48 @@ export function initEstimator() {
     const selectEl = document.querySelector('#form-service');
     const descEl = document.querySelector('#form-description');
 
-    if (selectEl) {
-      selectEl.value = state.categoryValue;
-    }
+    // Also prefill modal form if present
+    const modalSelect = document.querySelector('#consultation-modal select[name="service"]');
+    const modalDesc = document.querySelector('#consultation-modal textarea[name="description"]');
 
-    if (descEl) {
-      descEl.value = `[Initial Scope Assessment Request]\nService: ${state.category}\nRequired Urgency: ${state.urgency}\nScope Tier: ${state.scope}\nProtocol: ${state.protocol}\n\nAdditional Context:\n`;
-    }
+    const formattedDesc = `[Initial Scope Assessment Request]\nService: ${state.category}\nRequired Urgency: ${state.urgency}\nScope Tier: ${state.scope}\nProtocol: ${state.protocol}\n\nAdditional Context:\n`;
+
+    if (selectEl) selectEl.value = state.categoryValue;
+    if (descEl) descEl.value = formattedDesc;
+    if (modalSelect) modalSelect.value = state.categoryValue;
+    if (modalDesc) modalDesc.value = formattedDesc;
 
     contactSection?.scrollIntoView({ behavior: 'smooth' });
 
+    // Show feedback toast
+    const toastContainer = document.getElementById('toast-container');
+    if (toastContainer) {
+      const toast = document.createElement('div');
+      toast.className = 'toast';
+      toast.innerHTML = `
+        <svg class="toast-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+        <div class="toast-message">Scope configuration applied to consultation form!</div>
+      `;
+      toastContainer.appendChild(toast);
+      setTimeout(() => toast.classList.add('show'), 80);
+      setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 400);
+      }, 3500);
+    }
+
     setTimeout(() => {
       descEl?.focus();
-    }, 800);
+      const formCard = document.querySelector('.form-card');
+      if (formCard) {
+        formCard.style.outline = '2px solid var(--accent-gold)';
+        formCard.style.outlineOffset = '4px';
+        setTimeout(() => {
+          formCard.style.outline = '';
+          formCard.style.outlineOffset = '';
+        }, 2200);
+      }
+    }, 700);
   });
 
   recalculate();

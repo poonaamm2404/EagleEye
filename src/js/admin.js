@@ -44,7 +44,7 @@ notifyBtn.addEventListener('click', async () => {
     }
   }
 });
-if (Notification.permission === "granted") {
+if ("Notification" in window && Notification.permission === "granted") {
   notificationsEnabled = true;
   notifyBtn.innerHTML = "Alerts Enabled ✓";
   notifyBtn.disabled = true;

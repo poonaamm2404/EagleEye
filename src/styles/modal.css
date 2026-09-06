@@ -283,3 +283,57 @@
   }
 }
 
+/* Modal Stacking & Z-Index Hierarchy */
+#policy-modal {
+  z-index: 2040;
+}
+#consultation-modal {
+  z-index: 2050;
+}
+#confirmation-modal {
+  z-index: 2100;
+}
+
+/* Footer button reset */
+button.footer-link {
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: inherit;
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: color 0.25s ease;
+  text-align: left;
+}
+
+button.footer-link:hover {
+  color: var(--accent-gold-hover);
+}
+
+/* Policy Tabs */
+.policy-tab-btn {
+  background: none;
+  border: 1px solid transparent;
+  color: var(--text-secondary);
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.policy-tab-btn:hover {
+  color: var(--text-main);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.policy-tab-btn.active {
+  color: #060A12;
+  background: linear-gradient(135deg, #DFBF7D, #C5A059);
+  font-weight: 700;
+  border-color: #DFBF7D;
+}
+
+

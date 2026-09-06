@@ -215,6 +215,7 @@
 
         </div>
       </div>
+    </section>
     <!-- SERVICES SECTION -->
     <section id="services" class="section">
       <div class="container">
@@ -1249,9 +1250,9 @@
           &copy; 2026 ANVESHAK Private Investigation Firm. All rights reserved.
         </div>
         <div style="display: flex; gap: 24px;">
-          <a href="#" class="footer-link" onclick="alert('Privacy Policy: ANVESHAK respects your absolute privacy. All submitted information is strictly confidential and protected under non-disclosure protocols.'); return false;">Privacy Policy</a>
-          <a href="#" class="footer-link" onclick="alert('Terms & Conditions: Services are rendered under written bilateral non-disclosure agreements following strict legal compliance reviews.'); return false;">Terms & Conditions</a>
-          <a href="#" class="footer-link" onclick="alert('Disclaimer: Services subject to legal and operational feasibility.'); return false;">Disclaimer</a>
+          <button type="button" class="footer-link footer-policy-btn" data-open-policy="privacy">Privacy Policy</button>
+          <button type="button" class="footer-link footer-policy-btn" data-open-policy="terms">Terms & Conditions</button>
+          <button type="button" class="footer-link footer-policy-btn" data-open-policy="disclaimer">Disclaimer</button>
         </div>
       </div>
     </div>
@@ -1413,6 +1414,54 @@
       <button class="btn btn-primary modal-close-btn-action" style="width: 100%;" onclick="document.getElementById('confirmation-modal').classList.remove('active'); document.body.style.overflow='';">
         Acknowledge & Close
       </button>
+    </div>
+  </div>
+
+  <!-- LEGAL & POLICIES MODAL -->
+  <div id="policy-modal" class="modal-overlay">
+    <div class="modal-card" style="max-width: 720px;">
+      <button class="modal-close-btn" aria-label="Close modal">
+        <svg style="width:20px; height:20px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+
+      <div style="margin-bottom: 24px;">
+        <span class="badge badge-gold" style="margin-bottom: 10px;">Governance</span>
+        <h3 id="policy-modal-title" style="font-family: var(--font-heading); font-size: 1.85rem; font-weight: 600; color: var(--text-main); margin-bottom: 6px;">Confidentiality & Compliance</h3>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">Official governance protocols safeguarding all ANVESHAK client enquiries.</p>
+      </div>
+
+      <div class="policy-tabs" style="display: flex; gap: 8px; margin-bottom: 24px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 12px;">
+        <button type="button" class="policy-tab-btn active" data-policy-tab="privacy">Privacy Policy</button>
+        <button type="button" class="policy-tab-btn" data-policy-tab="terms">Terms & Conditions</button>
+        <button type="button" class="policy-tab-btn" data-policy-tab="disclaimer">Operational Disclaimer</button>
+      </div>
+
+      <div id="policy-privacy" class="policy-pane active" style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.7;">
+        <h4 style="color: var(--text-main); font-size: 1.1rem; margin-bottom: 8px;">1. Absolute Client Discretion</h4>
+        <p style="margin-bottom: 16px;">All communications, preliminary enquiry submissions, and investigation directives are shielded under our strict bilateral non-disclosure protocols. We never disclose, monetize, or transfer client information to any third party.</p>
+        <h4 style="color: var(--text-main); font-size: 1.1rem; margin-bottom: 8px;">2. Encrypted Data Retention</h4>
+        <p style="margin-bottom: 16px;">Case files and digital telemetry are retained on air-gapped encrypted servers only for the duration mandated by the scope or statutory legal compliance. Case data is permanently expunged upon final handover and debriefing.</p>
+      </div>
+
+      <div id="policy-terms" class="policy-pane" style="display: none; font-size: 0.95rem; color: var(--text-secondary); line-height: 1.7;">
+        <h4 style="color: var(--text-main); font-size: 1.1rem; margin-bottom: 8px;">1. Service Engagement Scope</h4>
+        <p style="margin-bottom: 16px;">Services are rendered strictly according to signed scopes of work and executed non-disclosure agreements. Operational parameters, timelines, and deliverables are defined upfront prior to active operative deployment.</p>
+        <h4 style="color: var(--text-main); font-size: 1.1rem; margin-bottom: 8px;">2. Statutory Adherence</h4>
+        <p style="margin-bottom: 16px;">ANVESHAK operates strictly within statutory guidelines and judicial evidence frameworks. We categorically decline any mandate requesting illegal intrusion, phone hacking, spyware, or unauthorized account tampering.</p>
+      </div>
+
+      <div id="policy-disclaimer" class="policy-pane" style="display: none; font-size: 0.95rem; color: var(--text-secondary); line-height: 1.7;">
+        <h4 style="color: var(--text-main); font-size: 1.1rem; margin-bottom: 8px;">1. Fact-Based Verification</h4>
+        <p style="margin-bottom: 16px;">Private investigations deliver unvarnished, verifiable facts as they exist. Deliverables reflect empirical findings gathered through legal physical observation, open-source intelligence, and verified public databases.</p>
+        <h4 style="color: var(--text-main); font-size: 1.1rem; margin-bottom: 8px;">2. Operational Feasibility</h4>
+        <p style="margin-bottom: 16px;">All engagements are subject to preliminary legal and operational feasibility review. If a requested objective conflicts with statutory boundaries, legally compliant alternative paths will be discussed.</p>
+      </div>
+
+      <div style="margin-top: 32px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: flex-end;">
+        <button type="button" class="btn btn-primary modal-close-btn" style="padding: 10px 24px; font-size: 0.9rem;">
+          Close Document
+        </button>
+      </div>
     </div>
   </div>
 

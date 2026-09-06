@@ -193,16 +193,77 @@ export function initModal() {
   const serviceModalOverlay = document.getElementById('service-modal');
   const articleModalOverlay = document.getElementById('article-modal');
   const confirmationModalOverlay = document.getElementById('confirmation-modal');
+  const policyModalOverlay = document.getElementById('policy-modal');
 
-  const closeBtns = document.querySelectorAll('.modal-close-btn');
+  const closeBtns = document.querySelectorAll('.modal-close-btn, .modal-close-btn-action');
   const openConsultationBtns = document.querySelectorAll('[data-open-modal="consultation"]');
   const serviceDetailBtns = document.querySelectorAll('[data-open-service]');
   const articleDetailBtns = document.querySelectorAll('[data-open-article]');
+  const policyBtns = document.querySelectorAll('[data-open-policy]');
+
+  let lastViewedService = null;
+  let lastViewedArticle = null;
+
+  function closeAllModals() {
+    [consultationModalOverlay, serviceModalOverlay, articleModalOverlay, confirmationModalOverlay, policyModalOverlay].forEach(overlay => {
+      overlay?.classList.remove('active');
+    });
+    document.body.style.overflow = '';
+  }
 
   // Open Consultation Modal
   openConsultationBtns.forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
+
+      // If clicked from inside another modal, close that modal first
+      if (serviceModalOverlay?.classList.contains('active')) {
+        serviceModalOverlay.classList.remove('active');
+      }
+      if (articleModalOverlay?.classList.contains('active')) {
+        articleModalOverlay.classList.remove('active');
+      }
+      if (policyModalOverlay?.classList.contains('active')) {
+        policyModalOverlay.classList.remove('active');
+      }
+
+      // Close mobile drawer if open
+      const mobileDrawer = document.querySelector('.mobile-drawer');
+      const mobileToggle = document.querySelector('.mobile-toggle');
+      const drawerOverlay = document.querySelector('.mobile-drawer-overlay');
+      if (mobileDrawer?.classList.contains('open')) {
+        mobileDrawer.classList.remove('open');
+        mobileToggle?.classList.remove('active');
+        drawerOverlay?.classList.remove('open');
+      }
+
+      // Pre-fill service in modal form if coming from a service context
+      const serviceSelect = consultationModalOverlay?.querySelector('select[name="service"]');
+      if (serviceSelect && lastViewedService) {
+        serviceSelect.value = lastViewedService;
+      }
+
+      // Pre-fill context if coming from an article
+      const descTextarea = consultationModalOverlay?.querySelector('textarea[name="description"]');
+      if (btn.closest('#article-modal') && lastViewedArticle && descTextarea) {
+        descTextarea.value = `[Enquiry regarding: ${lastViewedArticle.title}]\n\nPlease advise on applicable consultation options.\n`;
+        if (serviceSelect) {
+          const catMap = {
+            'bg-vetting': 'background',
+            'corp-diligence': 'corporate',
+            'cyber-safety': 'cyber',
+            'investigation-ethics': 'legal',
+            'selecting-firm': 'corporate'
+          };
+          for (const [key, svc] of Object.entries(catMap)) {
+            if (lastViewedArticle.key === key) {
+              serviceSelect.value = svc;
+              break;
+            }
+          }
+        }
+      }
+
       consultationModalOverlay?.classList.add('active');
       document.body.style.overflow = 'hidden';
     });
@@ -214,6 +275,7 @@ export function initModal() {
       e.preventDefault();
       const serviceKey = btn.getAttribute('data-open-service');
       const data = servicesDetailData[serviceKey];
+      lastViewedService = serviceKey;
 
       if (data && serviceModalOverlay) {
         const titleEl = serviceModalOverlay.querySelector('.service-modal-title');
@@ -236,6 +298,9 @@ export function initModal() {
           `).join('');
         }
 
+        // Close any other open modal
+        [consultationModalOverlay, articleModalOverlay, policyModalOverlay].forEach(m => m?.classList.remove('active'));
+
         serviceModalOverlay.classList.add('active');
         document.body.style.overflow = 'hidden';
       }
@@ -248,6 +313,9 @@ export function initModal() {
       e.preventDefault();
       const articleKey = btn.getAttribute('data-open-article');
       const data = articlesDetailData[articleKey];
+      if (data) {
+        lastViewedArticle = { key: articleKey, ...data };
+      }
 
       if (data && articleModalOverlay) {
         const catEl = articleModalOverlay.querySelector('.article-modal-category');
@@ -262,20 +330,70 @@ export function initModal() {
         if (imgEl) imgEl.src = data.img;
         if (bodyEl) bodyEl.innerHTML = data.content;
 
+        // Close any other open modal
+        [consultationModalOverlay, serviceModalOverlay, policyModalOverlay].forEach(m => m?.classList.remove('active'));
+
         articleModalOverlay.classList.add('active');
         document.body.style.overflow = 'hidden';
       }
     });
   });
 
-  // Close All Modals
+  // Open Policy Modal & Tabs
+  policyBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetPolicy = btn.getAttribute('data-open-policy') || 'privacy';
+      switchPolicyTab(targetPolicy);
+
+      closeAllModals();
+      policyModalOverlay?.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  // Policy Modal Tab Buttons
+  const policyTabBtns = policyModalOverlay?.querySelectorAll('[data-policy-tab]');
+  policyTabBtns?.forEach(tabBtn => {
+    tabBtn.addEventListener('click', () => {
+      const tabKey = tabBtn.getAttribute('data-policy-tab');
+      switchPolicyTab(tabKey);
+    });
+  });
+
+  function switchPolicyTab(tabKey) {
+    if (!policyModalOverlay) return;
+    const tabBtns = policyModalOverlay.querySelectorAll('[data-policy-tab]');
+    const panes = policyModalOverlay.querySelectorAll('.policy-pane');
+
+    tabBtns.forEach(b => {
+      if (b.getAttribute('data-policy-tab') === tabKey) {
+        b.classList.add('active');
+      } else {
+        b.classList.remove('active');
+      }
+    });
+
+    panes.forEach(pane => {
+      if (pane.id === `policy-${tabKey}`) {
+        pane.style.display = 'block';
+        pane.classList.add('active');
+      } else {
+        pane.style.display = 'none';
+        pane.classList.remove('active');
+      }
+    });
+  }
+
+  // Close Modals via Close Buttons
   closeBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       closeAllModals();
     });
   });
 
-  [consultationModalOverlay, serviceModalOverlay, articleModalOverlay, confirmationModalOverlay].forEach(overlay => {
+  // Close by clicking backdrop
+  [consultationModalOverlay, serviceModalOverlay, articleModalOverlay, confirmationModalOverlay, policyModalOverlay].forEach(overlay => {
     overlay?.addEventListener('click', (e) => {
       if (e.target === overlay) {
         closeAllModals();
@@ -283,10 +401,10 @@ export function initModal() {
     });
   });
 
-  function closeAllModals() {
-    [consultationModalOverlay, serviceModalOverlay, articleModalOverlay, confirmationModalOverlay].forEach(overlay => {
-      overlay?.classList.remove('active');
-    });
-    document.body.style.overflow = '';
-  }
+  // Close by pressing Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeAllModals();
+    }
+  });
 }

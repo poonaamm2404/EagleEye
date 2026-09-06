@@ -261,12 +261,14 @@
 @media (max-width: 1024px) {
   .footer-grid {
     grid-template-columns: 1fr 1fr;
+    gap: 36px;
   }
 }
 
 @media (max-width: 640px) {
   .footer-grid {
     grid-template-columns: 1fr;
+    gap: 28px;
   }
 
   .footer-bottom {
@@ -275,11 +277,47 @@
     text-align: center;
   }
 
-  .floating-whatsapp {
-    bottom: 24px;
-    left: 24px;
-    width: 48px;
-    height: 48px;
+  .footer-bottom div:last-child {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .modal-overlay {
+    padding: 12px;
+  }
+
+  .modal-card {
+    padding: 24px 16px;
+    max-height: 92vh;
+    max-height: 92dvh;
+    border-radius: var(--radius-sm);
+  }
+
+  .modal-close-btn {
+    top: 14px;
+    right: 14px;
+    width: 34px;
+    height: 34px;
+  }
+
+  .article-modal-title {
+    font-size: 1.45rem;
+    line-height: 1.25;
+  }
+
+  .article-modal-img {
+    height: 190px;
+  }
+
+  .policy-tabs {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .policy-tab-btn {
+    font-size: 0.78rem;
+    padding: 6px 12px;
   }
 }
 

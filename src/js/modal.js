@@ -235,6 +235,7 @@ export function initModal() {
         mobileDrawer.classList.remove('open');
         mobileToggle?.classList.remove('active');
         drawerOverlay?.classList.remove('open');
+        document.body.classList.remove('menu-open');
       }
 
       // Pre-fill service in modal form if coming from a service context

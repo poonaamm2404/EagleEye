@@ -669,3 +669,115 @@ button {
   40% { transform: scale(1); }
 }
 
+/* ==========================================================================
+   Responsive Breakpoints for Tablet & Mobile (Laptops remain as is)
+   ========================================================================== */
+
+/* Tablet (max-width: 1024px) */
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 24px;
+  }
+
+  .section {
+    padding: 76px 0;
+  }
+
+  .section-header {
+    margin-bottom: 48px;
+  }
+
+  .section-title {
+    font-size: 2.35rem;
+  }
+
+  .section-description {
+    font-size: 1.02rem;
+  }
+}
+
+/* Mobile Devices (max-width: 640px) */
+@media (max-width: 640px) {
+  html {
+    font-size: 15px;
+  }
+
+  .container {
+    padding: 0 16px;
+  }
+
+  .section {
+    padding: 54px 0;
+  }
+
+  .section-header {
+    margin-bottom: 32px;
+  }
+
+  .section-subtitle {
+    font-size: 0.76rem;
+    margin-bottom: 10px;
+    letter-spacing: 0.1em;
+  }
+
+  .section-subtitle::before {
+    width: 16px;
+  }
+
+  .section-title {
+    font-size: 1.9rem;
+    line-height: 1.2;
+    margin-bottom: 12px;
+  }
+
+  .section-description {
+    font-size: 0.92rem;
+    line-height: 1.6;
+  }
+
+  .btn {
+    padding: 12px 20px;
+    font-size: 0.88rem;
+    gap: 8px;
+  }
+
+  /* Floating WhatsApp Button */
+  .floating-whatsapp {
+    bottom: 18px;
+    left: 16px;
+    width: 46px;
+    height: 46px;
+  }
+
+  .whatsapp-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  /* Floating Chat Toggle Button */
+  .chat-toggle-btn {
+    bottom: 18px;
+    right: 16px;
+    width: 48px;
+    height: 48px;
+  }
+
+  .chat-toggle-btn svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  /* Mobile Chat Window */
+  .chat-window {
+    bottom: 74px;
+    right: 10px;
+    left: 10px;
+    width: auto;
+    max-width: 380px;
+    height: 450px;
+    max-height: 70vh;
+    margin: 0 auto;
+  }
+}
+
+

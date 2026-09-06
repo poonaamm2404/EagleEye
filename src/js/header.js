@@ -3,6 +3,7 @@ export function initHeader() {
   const mobileToggle = document.querySelector('.mobile-toggle');
   const mobileDrawer = document.querySelector('.mobile-drawer');
   const drawerOverlay = document.querySelector('.mobile-drawer-overlay');
+  const drawerCloseBtn = document.querySelector('.mobile-drawer-close');
   const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
   const navLinks = document.querySelectorAll('.nav-link');
   const mobileModalBtns = mobileDrawer?.querySelectorAll('[data-open-modal]');
@@ -18,14 +19,17 @@ export function initHeader() {
 
   // Mobile menu toggle
   function toggleMenu() {
-    mobileToggle?.classList.toggle('active');
-    mobileDrawer?.classList.toggle('open');
-    drawerOverlay?.classList.toggle('open');
-    document.body.style.overflow = mobileDrawer?.classList.contains('open') ? 'hidden' : '';
+    const willOpen = !mobileDrawer?.classList.contains('open');
+    mobileToggle?.classList.toggle('active', willOpen);
+    mobileDrawer?.classList.toggle('open', willOpen);
+    drawerOverlay?.classList.toggle('open', willOpen);
+    document.body.classList.toggle('menu-open', willOpen);
+    document.body.style.overflow = willOpen ? 'hidden' : '';
   }
 
   mobileToggle?.addEventListener('click', toggleMenu);
   drawerOverlay?.addEventListener('click', toggleMenu);
+  drawerCloseBtn?.addEventListener('click', toggleMenu);
 
   mobileNavLinks.forEach(link => {
     link.addEventListener('click', () => {

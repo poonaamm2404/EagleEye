@@ -25,16 +25,14 @@ function getMailTransporter() {
     return null;
   }
   return nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 465,
-    secure: true, // SSL
+    service: 'gmail',
     auth: {
       user: process.env.GMAIL_USER.trim(),
       pass: process.env.GMAIL_PASS.replace(/\s+/g, '') // remove any spaces
     },
-    tls: {
-      rejectUnauthorized: false
-    }
+    connectionTimeout: 10000, // 10 seconds max connection wait
+    greetingTimeout: 10000,
+    socketTimeout: 15000
   });
 }
 
@@ -44,17 +42,24 @@ app.post('/api/consultations', async (req, res) => {
     console.log('[Consultation Request Received]:', req.body);
     const newConsultation = new Consultation(req.body);
     const savedConsultation = await newConsultation.save();
-    console.log('[Consultation Saved]:', savedConsultation._id);
+    console.log('[Consultation Saved to Database]:', savedConsultation._id);
     
-    // Send Email Notifications
+    // 1. Respond to client IMMEDIATELY so UI never hangs
+    res.status(201).json({ 
+      success: true, 
+      data: savedConsultation, 
+      message: 'Consultation securely requested.' 
+    });
+
+    // 2. Dispatch Email Notifications in background asynchronously
     const mailTransporter = getMailTransporter();
     if (mailTransporter) {
-      console.log(`[Sending Emails] From: ${process.env.GMAIL_USER} -> To: ${savedConsultation.email}`);
+      console.log(`[Dispatching Emails] From: ${process.env.GMAIL_USER} -> To: ${savedConsultation.email}`);
       
-      // 1. Alert to Agency
+      // Alert to Agency
       const agencyMailOptions = {
         from: `"Anveshak Agency" <${process.env.GMAIL_USER}>`,
-        to: process.env.GMAIL_USER, // Sending to yourself
+        to: process.env.GMAIL_USER,
         subject: `🚨 NEW LEAD: ${savedConsultation.service} - ${savedConsultation.name}`,
         html: `
           <h3>New Consultation Request</h3>
@@ -68,10 +73,10 @@ app.post('/api/consultations', async (req, res) => {
         `
       };
 
-      // 2. Confirmation to Client
+      // Confirmation to Client
       const clientMailOptions = {
         from: `"Anveshak Operations" <${process.env.GMAIL_USER}>`,
-        to: savedConsultation.email, // Send to user
+        to: savedConsultation.email,
         subject: `Confidential: Consultation Request Received`,
         html: `
           <div style="font-family: Arial, sans-serif; color: #333; line-height: 1.6; max-width: 600px; margin: 0 auto; border: 1px solid #eee; padding: 20px; border-radius: 8px;">
@@ -87,23 +92,20 @@ app.post('/api/consultations', async (req, res) => {
         `
       };
 
-      // Await both emails so cloud container does not close before SMTP delivery
-      const results = await Promise.allSettled([
+      Promise.allSettled([
         mailTransporter.sendMail(agencyMailOptions),
         mailTransporter.sendMail(clientMailOptions)
-      ]);
-
-      results.forEach((res, idx) => {
-        const type = idx === 0 ? 'Agency alert' : 'Client confirmation';
-        if (res.status === 'fulfilled') {
-          console.log(`✅ ${type} email sent successfully! MessageId:`, res.value.messageId);
-        } else {
-          console.error(`❌ ${type} email delivery failed:`, res.reason);
-        }
-      });
+      ]).then(results => {
+        results.forEach((r, idx) => {
+          const type = idx === 0 ? 'Agency alert' : 'Client confirmation';
+          if (r.status === 'fulfilled') {
+            console.log(`✅ ${type} email sent successfully! MessageId:`, r.value.messageId);
+          } else {
+            console.error(`❌ ${type} email delivery failed:`, r.reason?.message || r.reason);
+          }
+        });
+      }).catch(err => console.error('Email dispatch error:', err));
     }
-
-    res.status(201).json({ success: true, data: savedConsultation, message: 'Consultation securely requested.' });
   } catch (error) {
     console.error('Error saving consultation:', error);
     res.status(500).json({ success: false, message: 'Server error, could not process request.' });

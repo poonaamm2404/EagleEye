@@ -25,10 +25,15 @@ function getMailTransporter() {
     return null;
   }
   return nodemailer.createTransport({
-    service: 'gmail',
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true, // SSL
     auth: {
-      user: process.env.GMAIL_USER,
-      pass: process.env.GMAIL_PASS.replace(/\s+/g, '') // remove any accidental spaces
+      user: process.env.GMAIL_USER.trim(),
+      pass: process.env.GMAIL_PASS.replace(/\s+/g, '') // remove any spaces
+    },
+    tls: {
+      rejectUnauthorized: false
     }
   });
 }
@@ -41,10 +46,11 @@ app.post('/api/consultations', async (req, res) => {
     const savedConsultation = await newConsultation.save();
     console.log('[Consultation Saved]:', savedConsultation._id);
     
-    // Send Email Notifications in the background
+    // Send Email Notifications
     const mailTransporter = getMailTransporter();
     if (mailTransporter) {
       console.log(`[Sending Emails] From: ${process.env.GMAIL_USER} -> To: ${savedConsultation.email}`);
+      
       // 1. Alert to Agency
       const agencyMailOptions = {
         from: `"Anveshak Agency" <${process.env.GMAIL_USER}>`,
@@ -61,14 +67,11 @@ app.post('/api/consultations', async (req, res) => {
           <p><strong>Description:</strong><br>${savedConsultation.description}</p>
         `
       };
-      mailTransporter.sendMail(agencyMailOptions)
-        .then(info => console.log('✅ Agency lead alert sent successfully! MessageId:', info.messageId))
-        .catch(err => console.error("❌ Agency email failed:", err));
 
       // 2. Confirmation to Client
       const clientMailOptions = {
         from: `"Anveshak Operations" <${process.env.GMAIL_USER}>`,
-        to: savedConsultation.email, // Send to the user's email
+        to: savedConsultation.email, // Send to user
         subject: `Confidential: Consultation Request Received`,
         html: `
           <div style="font-family: Arial, sans-serif; color: #333; line-height: 1.6; max-width: 600px; margin: 0 auto; border: 1px solid #eee; padding: 20px; border-radius: 8px;">
@@ -83,9 +86,21 @@ app.post('/api/consultations', async (req, res) => {
           </div>
         `
       };
-      mailTransporter.sendMail(clientMailOptions)
-        .then(info => console.log('✅ Client confirmation sent successfully! MessageId:', info.messageId))
-        .catch(err => console.error("❌ Client email failed:", err));
+
+      // Await both emails so cloud container does not close before SMTP delivery
+      const results = await Promise.allSettled([
+        mailTransporter.sendMail(agencyMailOptions),
+        mailTransporter.sendMail(clientMailOptions)
+      ]);
+
+      results.forEach((res, idx) => {
+        const type = idx === 0 ? 'Agency alert' : 'Client confirmation';
+        if (res.status === 'fulfilled') {
+          console.log(`✅ ${type} email sent successfully! MessageId:`, res.value.messageId);
+        } else {
+          console.error(`❌ ${type} email delivery failed:`, res.reason);
+        }
+      });
     }
 
     res.status(201).json({ success: true, data: savedConsultation, message: 'Consultation securely requested.' });

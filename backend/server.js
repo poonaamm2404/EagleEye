@@ -19,23 +19,32 @@ app.use(express.json());
 mongoose.connect(process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/anveshak')
   .then(() => console.log('Connected to MongoDB'))
   .catch(err => console.warn('MongoDB connection note:', err.message));
-// Configure Nodemailer Transporter
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.GMAIL_USER,
-    pass: process.env.GMAIL_PASS
+function getMailTransporter() {
+  if (!process.env.GMAIL_USER || !process.env.GMAIL_PASS) {
+    console.warn('[Nodemailer] GMAIL_USER or GMAIL_PASS is not configured in environment!');
+    return null;
   }
-});
+  return nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: process.env.GMAIL_USER,
+      pass: process.env.GMAIL_PASS.replace(/\s+/g, '') // remove any accidental spaces
+    }
+  });
+}
 
 // API Routes
 app.post('/api/consultations', async (req, res) => {
   try {
+    console.log('[Consultation Request Received]:', req.body);
     const newConsultation = new Consultation(req.body);
     const savedConsultation = await newConsultation.save();
+    console.log('[Consultation Saved]:', savedConsultation._id);
     
     // Send Email Notifications in the background
-    if (process.env.GMAIL_USER && process.env.GMAIL_PASS) {
+    const mailTransporter = getMailTransporter();
+    if (mailTransporter) {
+      console.log(`[Sending Emails] From: ${process.env.GMAIL_USER} -> To: ${savedConsultation.email}`);
       // 1. Alert to Agency
       const agencyMailOptions = {
         from: `"Anveshak Agency" <${process.env.GMAIL_USER}>`,
@@ -46,12 +55,15 @@ app.post('/api/consultations', async (req, res) => {
           <p><strong>Name:</strong> ${savedConsultation.name}</p>
           <p><strong>Email:</strong> ${savedConsultation.email}</p>
           <p><strong>Phone:</strong> ${savedConsultation.phone}</p>
+          <p><strong>Location:</strong> ${savedConsultation.location || 'Not specified'}</p>
           <p><strong>Service:</strong> ${savedConsultation.service}</p>
-          <p><strong>Method:</strong> ${savedConsultation.contactMethod}</p>
+          <p><strong>Method:</strong> ${savedConsultation.contactMethod || 'Email'}</p>
           <p><strong>Description:</strong><br>${savedConsultation.description}</p>
         `
       };
-      transporter.sendMail(agencyMailOptions).catch(err => console.error("Agency email failed:", err));
+      mailTransporter.sendMail(agencyMailOptions)
+        .then(info => console.log('✅ Agency lead alert sent successfully! MessageId:', info.messageId))
+        .catch(err => console.error("❌ Agency email failed:", err));
 
       // 2. Confirmation to Client
       const clientMailOptions = {
@@ -64,14 +76,16 @@ app.post('/api/consultations', async (req, res) => {
             <p>Dear ${savedConsultation.name},</p>
             <p>This is an automated confirmation that your secure consultation request has been successfully received by our team.</p>
             <p><strong>Reference Service:</strong> ${savedConsultation.service}</p>
-            <p>One of our specialists is currently reviewing your brief and will contact you shortly via your preferred method (${savedConsultation.contactMethod}).</p>
+            <p>One of our specialists is currently reviewing your brief and will contact you shortly via your preferred method (${savedConsultation.contactMethod || 'Email'}).</p>
             <p style="color: #e74c3c; font-size: 13px; font-weight: bold; margin-top: 30px;">For your security, please do not reply to this automated email with sensitive case details.</p>
             <hr style="border: none; border-top: 1px solid #eee; margin: 20px 0;">
             <p style="font-size: 14px; color: #777;">Best regards,<br><strong>Anveshak Agency</strong></p>
           </div>
         `
       };
-      transporter.sendMail(clientMailOptions).catch(err => console.error("Client email failed:", err));
+      mailTransporter.sendMail(clientMailOptions)
+        .then(info => console.log('✅ Client confirmation sent successfully! MessageId:', info.messageId))
+        .catch(err => console.error("❌ Client email failed:", err));
     }
 
     res.status(201).json({ success: true, data: savedConsultation, message: 'Consultation securely requested.' });
